@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD</title>
+</head>
+<body>
+
+<form action="/dictionary/add" method="post">
+
+    <div >
+        <h4> Please enter the key</h4>
+        <input type="text"  name="key"  >
+        <h4>Please enter the value</h4>
+        <input type="text"  name="value"  >
+       </div>
+
+<br>
+    <tr  th:text="${add}"></tr>
+    <br>
+    <br>
+
+
+    <p><input type="submit"  value="Send" ></p>
+</form>
+
+<form action="/dictionary/selection" >
+    <p><input type="submit"  value="Back" ></p>
+</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecting a dictionary</title>
+</head>
+<body>
+
+<h3>Select a vocabulary</h3>
+<form action="/dictionary/selection" method="post" target="_self">
+
+    <label>
+        <select name="systemChoice">
+            <option value="map">map</option>
+            <option value="file">file</option>
+            <option value="jdbc">database</option>
+        </select>
+    </label>
+<br>
+    <br>
+
+    <label>
+        <select name="choiceDictionary">
+            <option value="1">English-Russian dictionary</option>
+            <option value="2">Digital dictionary</option>
+        </select>
+    </label>
+
+    <p><input type="submit" value="Send"></p>
+</form>
+</body>
+</html>

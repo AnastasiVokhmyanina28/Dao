@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<form action="/dictionary/search" method="post">
+    <h4>Please enter the key</h4>
+    <label>
+        <input type="text" name="key">
+    </label><br>
+    <tr th:text="${search}">key</tr> <br>
+    <p><input type="submit" value="Send"></p>
+    <br>
+</form>
+
+<form action="/dictionary/selection" >
+    <p><input type="submit"  value="Back" ></p>
+</form>
+</body>
+</html>

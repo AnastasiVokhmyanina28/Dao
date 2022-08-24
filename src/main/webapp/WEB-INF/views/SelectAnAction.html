@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select an action</title>
+</head>
+<body>
+<h3>Select the action you want to perform with this dictionary</h3>
+
+<form action="/dictionary/reading" method="post" target="_self">
+    <button>Reading a list of pairs</button>
+</form>
+<br>
+<form action="/dictionary/delete" method="get" target="_self">
+    <button>Deleting an entry</button>
+</form>
+    <br>
+<form action="/dictionary/search" method="get" target="_self">
+    <button>Record search</button>
+</form>
+<br>
+<form action="/dictionary/add" method="get" target="_self">
+    <button>Adding an entry</button>
+</form>
+<br>
+<form action="/dictionary/dictionaries" target="_self">
+    <button>Change the dictionary</button>
+</form>
+
+</body>
+</html>

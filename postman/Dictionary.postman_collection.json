@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "2369f113-80c7-4ab3-85a6-294af3b421e0",
+		"name": "Dictionary",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21547643"
+	},
+	"item": [
+		{
+			"name": "delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/dictionary/delete?key=fgff&choiceDictionary=1&systemChoice=map",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"dictionary",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "fgff"
+						},
+						{
+							"key": "choiceDictionary",
+							"value": "1"
+						},
+						{
+							"key": "systemChoice",
+							"value": "map"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete not key",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/delete?key=pppp&choiceDictionary=1&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "pppp"
+								},
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "13"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 09:45:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No key found!"
+				},
+				{
+					"name": "delete key",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/delete?key=fgff&choiceDictionary=1&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "fgff"
+								},
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 09:49:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "The key has been successfully deleted!"
+				}
+			]
+		},
+		{
+			"name": "Adding  key",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Adding the correct key",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/add?key=ffff&value=lllllll&choiceDictionary=1&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"add"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "ffff"
+								},
+								{
+									"key": "value",
+									"value": "lllllll"
+								},
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:02:52 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "The key has been successfully added!"
+				},
+				{
+					"name": "Adding the incorrect key",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/add?key=fff5f&value=lllllll&choiceDictionary=1&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"add"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "fff5f"
+								},
+								{
+									"key": "value",
+									"value": "lllllll"
+								},
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:05:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No matches with the template were found!"
+				}
+			]
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "search by existing key",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/search?choiceDictionary=1&systemChoice=map&key=ffff",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"search"
+							],
+							"query": [
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								},
+								{
+									"key": "key",
+									"value": "ffff"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:36:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "ffff:lllllll"
+				},
+				{
+					"name": "search by a nonexistent key",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/search?choiceDictionary=1&systemChoice=map&key=qqqq",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"search"
+							],
+							"query": [
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								},
+								{
+									"key": "key",
+									"value": "qqqq"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:37:58 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "This key does not exist!"
+				}
+			]
+		},
+		{
+			"name": "reading",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "first dictionary reading",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/read?choiceDictionary=1&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"read"
+							],
+							"query": [
+								{
+									"key": "choiceDictionary",
+									"value": "1"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:40:52 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"ffff:lllllll\"\n]"
+				},
+				{
+					"name": "second dictionary reading",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/dictionary/read?choiceDictionary=2&systemChoice=map",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"dictionary",
+								"read"
+							],
+							"query": [
+								{
+									"key": "choiceDictionary",
+									"value": "2"
+								},
+								{
+									"key": "systemChoice",
+									"value": "map"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Jul 2022 10:43:30 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"12345:чсарер\",\n    \"14466:кнкнкне\",\n    \"12568:епркер\"\n]"
+				}
+			]
+		}
+	]
+}

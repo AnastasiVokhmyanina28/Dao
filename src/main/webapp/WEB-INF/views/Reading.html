@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Reading</title>
+</head>
+<body>
+
+
+<table>
+    <h3>Contents of the dictionary</h3>
+
+    <tr th:each="m : ${pairs}">
+        <td th:text="${m}">key</td>
+    </tr>
+</table>
+<form action="/dictionary/selection" >
+    <p><input type="submit"  value="Back" ></p>
+</form>
+</body>
+</html>

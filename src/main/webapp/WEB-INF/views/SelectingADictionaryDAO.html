@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecting a dictionary</title>
+</head>
+<body>
+
+
+<label>
+    <select class="Database" name="dictionary" >
+        <option value="0">select dictionary</option>
+
+        <option th:each="dictionaries : ${array}"
+                th:value = "${dictionaries.id}"
+                th:utext= "${dictionaries.dictionary}"></option>
+    </select>
+</label>
+
+
+<label>
+    <select class="Database" name="dictionary" >
+        <option value="0">select dictionary</option>
+
+        <option th:each="dictionaries : ${array}"
+                th:value = "${dictionaries.id}"
+                th:utext= "${dictionaries.dictionary}"></option>
+    </select>
+</label>
+
+<form action="/dictionary/selection" >
+    <p><input type="submit"  value="Выбрать" ></p>
+</form>
+
+</body>
+</html>
