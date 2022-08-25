@@ -3,7 +3,7 @@ package com.services.dao.impl;
 import com.config.JdbcConfig;
 import com.model.dto.ListOfDictionaries;
 import com.services.dao.DictionaryDao;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import java.sql.PreparedStatement;
@@ -20,8 +20,6 @@ public class DictionaryDAOImpl implements DictionaryDao {
         this.jdbcConfig = jdbcConfig;
     }
 
-
-
     @Override
     public List<ListOfDictionaries> getListOfDictionary() {
     Statement stat= jdbcConfig.getStat();
@@ -36,7 +34,7 @@ public class DictionaryDAOImpl implements DictionaryDao {
         }
         return dictionary ;
     }
-
+//Достаем полностью  всю строку по id
     @Override
     public ListOfDictionaries getLineOfDictionary(Long id) {
         Statement stat = jdbcConfig.getStat();
@@ -51,4 +49,24 @@ public class DictionaryDAOImpl implements DictionaryDao {
         }
         return ofDictionaries;
     }
+
+    @Override
+    public Integer getIdDictionary(String dictionary){
+        Statement statement = jdbcConfig.getStat();
+        Integer list;
+        try {
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select id from dictionaries where dictionary = ?");
+            preparedStatement.setString(1, dictionary);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            list = resultSet.getInt("id");
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+        return list;
+    }
+
+
+
+
 }

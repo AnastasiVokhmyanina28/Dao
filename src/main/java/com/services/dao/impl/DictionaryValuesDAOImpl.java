@@ -2,19 +2,17 @@ package com.services.dao.impl;
 
 import com.config.JdbcConfig;
 import com.model.dto.MeaningsLyingInTheDictionary;
-import com.view.Console;
+import com.services.dao.DictionaryValuesDAO;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class DictionaryValuesDAOImpl {
+public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     private JdbcConfig config;
 
+    @Override
     public List<MeaningsLyingInTheDictionary> getMeaningsLyingInTheDictionaries() {
         Statement statement = config.getStat();
         ArrayList<MeaningsLyingInTheDictionary> lying = new ArrayList<>();
@@ -29,7 +27,7 @@ public class DictionaryValuesDAOImpl {
         return lying;
     }
 
-
+    @Override
     public MeaningsLyingInTheDictionary getLineOfDictionary(String word) {
         Statement stat = config.getStat();
         MeaningsLyingInTheDictionary ofDictionaries;
@@ -44,7 +42,7 @@ public class DictionaryValuesDAOImpl {
         return ofDictionaries;
     }
 
-
+    @Override
     public boolean delete(String words) {
         Statement statement = config.getStat();
         try {
@@ -71,8 +69,8 @@ public class DictionaryValuesDAOImpl {
 //
 //    }
 
-
-    private String pattern (String dictionary) {
+    @Override
+    public String pattern (String dictionary) {
         String pattern= "";
         try {
             Statement statement = config.getStat();
@@ -86,7 +84,6 @@ public class DictionaryValuesDAOImpl {
         return pattern;
     }
 
-
     private boolean wordTemplate(String word, String dictionary){
         return Pattern.matches(pattern(dictionary), word);
     }
@@ -95,8 +92,15 @@ public class DictionaryValuesDAOImpl {
         return Pattern.matches(pattern(dictionary), translation);
     }
 
-    private boolean valid(String word,String translation, String dictionary){
+    @Override
+    public boolean valid(String word,String translation, String dictionary){
         return (wordTemplate(word,dictionary) && translationTemplate(translation, dictionary));
+    }
+
+
+
+    private void addingALineToDictionaryValues(int id, String word, String translation, String dictionary){
+        if (valid(word, translation,dictionary))
     }
 
 }

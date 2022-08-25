@@ -7,4 +7,5 @@ import java.util.List;
 public interface DictionaryDao {
   List<ListOfDictionaries> getListOfDictionary();
   ListOfDictionaries getLineOfDictionary(Long id);
+  Integer getIdDictionary(String dictionary);
 }

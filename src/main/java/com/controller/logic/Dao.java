@@ -13,8 +13,6 @@ public class Dao implements ChoiceOfAction {
         this.dictionaryDAO = dictionaryDAO;
     }
 
-
-
     @Override
     public String removeRecord(String key) {
         return null;

@@ -21,6 +21,9 @@ public class ListOfDictionaries {
         this.template = template;
     }
 
+    public ListOfDictionaries(long id) {
+    }
+
     public String getDictionary() {
         return dictionary;
     }
