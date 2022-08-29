@@ -6,24 +6,10 @@ import com.services.dao.DictionaryValuesDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
-public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
+public class DictionaryValuesDAOImpl implements DictionaryDAOImpl {
     private JdbcConfig config;
-    private int id;
-    private String word;
-    private String translation;
-    private  String dictionary;
-
-
-
-    public DictionaryValuesDAOImpl(int id, String word, String translation, String dictionary) {
-        this.id = id;
-        this.word = word;
-        this.translation = translation;
-        this.dictionary = dictionary;
-    }
 
     @Override
     public List<MeaningsLyingInTheDictionary> getMeaningsLyingInTheDictionaries() {
@@ -125,7 +111,7 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
 
     private boolean CheckingIfTheIdsMatch(int id){
         try {
-            Statement statement = config.getStat();,
+            Statement statement = config.getStat();
 
 
             PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select id from dictionaries  where dictionary = ? ");
