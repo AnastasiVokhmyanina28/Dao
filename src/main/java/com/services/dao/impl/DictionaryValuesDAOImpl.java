@@ -11,6 +11,19 @@ import java.util.regex.Pattern;
 
 public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     private JdbcConfig config;
+    private int id;
+    private String word;
+    private String translation;
+    private  String dictionary;
+
+
+
+    public DictionaryValuesDAOImpl(int id, String word, String translation, String dictionary) {
+        this.id = id;
+        this.word = word;
+        this.translation = translation;
+        this.dictionary = dictionary;
+    }
 
     @Override
     public List<MeaningsLyingInTheDictionary> getMeaningsLyingInTheDictionaries() {
@@ -43,11 +56,11 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     }
 
     @Override
-    public boolean delete(String words) {
+    public boolean delete(String word) {
         Statement statement = config.getStat();
         try {
             PreparedStatement statement1 = statement.getConnection().prepareStatement("delete from dictionary_values where word = ?");
-            statement1.setString(1, words);
+            statement1.setString(1, word);
             statement1.executeUpdate();
         } catch (Exception e) {
             return false;
@@ -61,7 +74,7 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
 
 //    public String add(String word, String translation, String dictionary) {
 //
-//    if (valid( word,  translation, dictionary)){
+//    if (valid( word,  translation, dictionary) сравниваем с troe/false){
 //        Statement statement = config.getStat();
 //        PreparedStatement preparedStatement = statement.getConnection("");
 //
@@ -98,9 +111,29 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     }
 
 
+//
+//    private void addingALineToDictionaryValues(int id, String word, String translation, String dictionary){
+//        if (valid(word, translation,dictionary))
+//    }
 
-    private void addingALineToDictionaryValues(int id, String word, String translation, String dictionary){
-        if (valid(word, translation,dictionary))
+    //метод который соберет в себе 3 метода сравнения и если все методы вернут true то
+//    private boolean checkStringsToSeeIfTheyMatch(int id, String word, String translate){
+//
+//        return true;
+//    }
+
+
+    private boolean CheckingIfTheIdsMatch(int id){
+        try {
+            Statement statement = config.getStat();,
+
+
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select id from dictionaries  where dictionary = ? ");
+            preparedStatement.setString(1, dictionary);
+            ResultSet resultSet = preparedStatement.executeQuery();
+        }
+
+
     }
 
 }
