@@ -10,6 +10,8 @@ public interface DictionaryValuesDAO {
     boolean delete(String words);
     String pattern (String dictionary);
     boolean valid(String word,String translation, String dictionary);
+    boolean checkStringsToSeeIfTheyMatch(int id, String word, String translate);
+
 
 
 }

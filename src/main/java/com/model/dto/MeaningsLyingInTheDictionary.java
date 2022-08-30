@@ -6,8 +6,14 @@ public class MeaningsLyingInTheDictionary {
     private String word;
     private String translation;
 
+    public MeaningsLyingInTheDictionary(int id_word) {
+    }
+    public MeaningsLyingInTheDictionary(String word) {
+    }
+
     public MeaningsLyingInTheDictionary(String word, String translation) {
     }
+
 
     public void setId(Long id) {
         this.id = id;

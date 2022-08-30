@@ -28,7 +28,7 @@ public class WordsDAOImpl implements WordsDAO {
         return a;
     }
 
-    public Integer checkTheIdForPresenceInTheTableWords(Integer wordId, Integer translationId) {
+    public Integer checkTheIdForPresenceInTheTableWords(int wordId, int translationId) {
         int stringID;
         try {
             Statement statement = jdbcConfig.getStat();

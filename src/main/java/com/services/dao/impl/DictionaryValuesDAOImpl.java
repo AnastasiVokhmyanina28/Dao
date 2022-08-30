@@ -14,8 +14,9 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     private int id;
     private String word;
     private String translation;
-    private  String dictionary;
-
+    private String dictionary;
+    private final String aCoupleExists = "This pairing exists";
+    private WordsDAOImpl dao;
 
 
     public DictionaryValuesDAOImpl(int id, String word, String translation, String dictionary) {
@@ -69,22 +70,26 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     }
 
 
+    // главный метод добавления, в котором собрано все
 
+    private void addingALineToDictionaryValues(String word, String translation, String dictionary, int id_words, int wordId, int translationId) {
+        if (valid(word, translation, dictionary)) { //вернет true , если слова подходят под шаблон
+            if (checkStringsToSeeIfTheyMatch(id_words, word, translation)) { // вернет true, если совпадений нет
+                addingARowToATable(word, translation, wordId, translationId); // метод записи
+                System.out.println("The pair has been successfully added"); // сделала текстом, чтоб было понятнее
+            } else {
+                System.out.println("This pairing exists");
+            }
+        } else {
+            System.out.println("No matches with the template were found");
+        }
 
+    }
 
-//    public String add(String word, String translation, String dictionary) {
-//
-//    if (valid( word,  translation, dictionary) сравниваем с troe/false){
-//        Statement statement = config.getStat();
-//        PreparedStatement preparedStatement = statement.getConnection("");
-//
-//    }
-//
-//    }
 
     @Override
-    public String pattern (String dictionary) {
-        String pattern= "";
+    public String pattern(String dictionary) {
+        String pattern = "";
         try {
             Statement statement = config.getStat();
             PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select template from dictionaries  where dictionary = ? ");
@@ -97,43 +102,72 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
         return pattern;
     }
 
-    private boolean wordTemplate(String word, String dictionary){
+
+    // ------ВАЛИДАЦИЯ СЛОВ НА ПАТТЕРН
+    @Override
+    public boolean valid(String word, String translation, String dictionary) {
+        return (wordTemplate(word, dictionary) && translationTemplate(translation, dictionary));
+    }
+
+    private boolean wordTemplate(String word, String dictionary) {
         return Pattern.matches(pattern(dictionary), word);
     }
 
-    private boolean translationTemplate(String dictionary, String translation){
+    private boolean translationTemplate(String dictionary, String translation) {
         return Pattern.matches(pattern(dictionary), translation);
     }
+//------------------------------------------------
 
+
+    // -----------ПРОВЕРКА ЕСТЬ ЛИ ТАКАЯ ЗАПИСЬ(без id)------ вернет true если список пустой
     @Override
-    public boolean valid(String word,String translation, String dictionary){
-        return (wordTemplate(word,dictionary) && translationTemplate(translation, dictionary));
+    public boolean checkStringsToSeeIfTheyMatch(int id_words, String word, String translation) {
+        return checkingIfTheWordsMatch(word).isEmpty() && checkingIfTheTranslationMatch(translation).isEmpty();
     }
 
-
-//
-//    private void addingALineToDictionaryValues(int id, String word, String translation, String dictionary){
-//        if (valid(word, translation,dictionary))
-//    }
-
-    //метод который соберет в себе 3 метода сравнения и если все методы вернут true то
-//    private boolean checkStringsToSeeIfTheyMatch(int id, String word, String translate){
-//
-//        return true;
-//    }
-
-
-    private boolean CheckingIfTheIdsMatch(int id){
+    private ArrayList<MeaningsLyingInTheDictionary> checkingIfTheWordsMatch(String word) {
+        ArrayList<MeaningsLyingInTheDictionary> lying = new ArrayList<>();
         try {
-            Statement statement = config.getStat();,
-
-
-            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select id from dictionaries  where dictionary = ? ");
-            preparedStatement.setString(1, dictionary);
+            Statement statement = config.getStat();
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select word from dictionary_values  where word = ? ");
+            preparedStatement.setString(1, word);
             ResultSet resultSet = preparedStatement.executeQuery();
+            lying.add(new MeaningsLyingInTheDictionary(resultSet.getString("word")));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-
+        return lying;
     }
+
+    private ArrayList<MeaningsLyingInTheDictionary> checkingIfTheTranslationMatch(String translation) {
+        ArrayList<MeaningsLyingInTheDictionary> lying = new ArrayList<>();
+        try {
+            Statement statement = config.getStat();
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("select translation from dictionary_values  where translation = ? ");
+            preparedStatement.setString(1, translation);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            lying.add(new MeaningsLyingInTheDictionary(resultSet.getString("translation")));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lying;
+    }
+    //-----------------------------------------------------
+
+    //-------МЕТОД ДОБАВЛЕНИЯ ПАР
+    //добавить в интерфейс
+    private void addingARowToATable(String word, String translation, int wordId, int translationId) {
+        Statement statement = config.getStat();
+        try {
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement("insert into dictionay_values(id_words, word, translation) values (?, ?, ?)");
+            preparedStatement.setInt(1, dao.checkTheIdForPresenceInTheTableWords(wordId, translationId));
+            preparedStatement.setString(2, word);
+            preparedStatement.setString(3, translation);
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
