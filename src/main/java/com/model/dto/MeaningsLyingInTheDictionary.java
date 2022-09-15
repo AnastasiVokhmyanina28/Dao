@@ -3,9 +3,6 @@ package com.model.dto;
 public class MeaningsLyingInTheDictionary {
     private Long id;
     private Long id_words;
-
-
-
     private String word;
     private String translation;
 
@@ -15,12 +12,8 @@ public class MeaningsLyingInTheDictionary {
     }
 
     public MeaningsLyingInTheDictionary(String word, String translation) {
-    }
-    public MeaningsLyingInTheDictionary(String translation) {
+        this.word = word;
         this.translation = translation;
-    }
-    public MeaningsLyingInTheDictionary(Long id_words) {
-        this.id_words = id_words;
     }
 
 
@@ -54,5 +47,10 @@ public class MeaningsLyingInTheDictionary {
 
     public String getTranslation() {
         return translation;
+    }
+
+    @Override
+    public String toString() {
+        return "key='" + word + " " + "value='" + translation + '\'';
     }
 }

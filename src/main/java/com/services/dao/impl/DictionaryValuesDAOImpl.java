@@ -1,27 +1,30 @@
 package com.services.dao.impl;
 
 import com.config.JdbcConfig;
+import com.controller.logic.Dictionary;
 import com.model.dto.MeaningsLyingInTheDictionary;
 import com.services.dao.DictionaryValuesDAO;
+import com.view.Console;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
+@Repository
 public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
-	@Autowired
+    @Autowired
     private JdbcConfig config;
 
-  
     private final String aCoupleExists = "This pairing exists";
-	 private final String p = "No matches with the template were found";
+    private final String p = "No matches with the template were found";
+
     private WordsDAOImpl dao;
 
 
 
-    }
-
+//вывод всех
     @Override
     public List<MeaningsLyingInTheDictionary> getMeaningsLyingInTheDictionaries() {
         Statement statement = config.getStat();
@@ -29,6 +32,7 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
         try {
             ResultSet resultSet = statement.executeQuery("select word, translation from dictionary_values");
             while (resultSet.next()) {
+
                 lying.add(new MeaningsLyingInTheDictionary(resultSet.getString("word"), resultSet.getString("translation")));
             }
         } catch (SQLException e) {
@@ -36,14 +40,14 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
         }
         return lying;
     }
-
+//поиск
     @Override
-    public MeaningsLyingInTheDictionary getLineOfDictionary(String word) {
+    public MeaningsLyingInTheDictionary getLineOfDictionary(String key) {
         Statement stat = config.getStat();
         MeaningsLyingInTheDictionary ofDictionaries;
         try {
             PreparedStatement result = stat.getConnection().prepareStatement("select word,translation  from dictionary_values where word = ? ");
-            result.setString(1, word);
+            result.setString(1, key);
             ResultSet resultSet = result.executeQuery();
             ofDictionaries = new MeaningsLyingInTheDictionary(resultSet.getString("word"), resultSet.getString("translation"));
         } catch (SQLException e) {
@@ -53,23 +57,21 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     }
 
     @Override
-    public boolean delete(String word) {
+    public String removeRecord(String key) {
         Statement statement = config.getStat();
         try {
-            PreparedStatement statement1 = statement.getConnection().prepareStatement("delete from dictionary_values where word = ?");
-            statement1.setString(1, word);
-            statement1.executeUpdate();
+            PreparedStatement stat = statement.getConnection().prepareStatement("delete from dictionary_values where word = ?");
+            stat.setString(1, key);
+            stat.executeUpdate();
         } catch (Exception e) {
-            return false;
+            return Dictionary.NO_KEY;
         }
-        return true;
+        return Console.KEY_DELETE;
     }
 
 
-
     // главный метод добавления, в котором собрано все
-
-   @Override
+    @Override
     public void addingALineToDictionaryValues(String word, String translation, String dictionary, int wordId, int translationId) {
         if (valid(word, translation, dictionary)) { //вернет true , если слова подходят под шаблон
             if (checkStringsToSeeIfTheyMatch(word, translation)) { // вернет true, если совпадений нет
@@ -83,8 +85,7 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
         }
 
     }
-	
-	
+
     private String pattern(String dictionary) {
         String pattern = "";
         try {
