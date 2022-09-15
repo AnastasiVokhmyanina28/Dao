@@ -10,20 +10,16 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
+	@Autowired
     private JdbcConfig config;
-    private int id;
-    private String word;
-    private String translation;
-    private String dictionary;
+
+  
     private final String aCoupleExists = "This pairing exists";
+	 private final String p = "No matches with the template were found";
     private WordsDAOImpl dao;
 
 
-    public DictionaryValuesDAOImpl(int id, String word, String translation, String dictionary) {
-        this.id = id;
-        this.word = word;
-        this.translation = translation;
-        this.dictionary = dictionary;
+
     }
 
     @Override
@@ -70,25 +66,26 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
     }
 
 
+
     // главный метод добавления, в котором собрано все
 
-    private void addingALineToDictionaryValues(String word, String translation, String dictionary, int id_words, int wordId, int translationId) {
+   @Override
+    public void addingALineToDictionaryValues(String word, String translation, String dictionary, int wordId, int translationId) {
         if (valid(word, translation, dictionary)) { //вернет true , если слова подходят под шаблон
-            if (checkStringsToSeeIfTheyMatch(id_words, word, translation)) { // вернет true, если совпадений нет
+            if (checkStringsToSeeIfTheyMatch(word, translation)) { // вернет true, если совпадений нет
                 addingARowToATable(word, translation, wordId, translationId); // метод записи
                 System.out.println("The pair has been successfully added"); // сделала текстом, чтоб было понятнее
             } else {
-                System.out.println("This pairing exists");
+                System.out.println(aCoupleExists);
             }
         } else {
             System.out.println("No matches with the template were found");
         }
 
     }
-
-
-    @Override
-    public String pattern(String dictionary) {
+	
+	
+    private String pattern(String dictionary) {
         String pattern = "";
         try {
             Statement statement = config.getStat();
@@ -121,7 +118,7 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
 
     // -----------ПРОВЕРКА ЕСТЬ ЛИ ТАКАЯ ЗАПИСЬ(без id)------ вернет true если список пустой
     @Override
-    public boolean checkStringsToSeeIfTheyMatch(int id_words, String word, String translation) {
+    public boolean checkStringsToSeeIfTheyMatch(String word, String translation) {
         return checkingIfTheWordsMatch(word).isEmpty() && checkingIfTheTranslationMatch(translation).isEmpty();
     }
 
@@ -168,6 +165,5 @@ public class DictionaryValuesDAOImpl implements DictionaryValuesDAO {
             throw new RuntimeException(e);
         }
     }
-
 
 }
